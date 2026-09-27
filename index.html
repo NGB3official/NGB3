@@ -1,0 +1,852 @@
+<<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NGB3</title>
+
+  <style>
+
+    /* =========================
+       물방울체
+    ========================= */
+
+    @font-face {
+      font-family: "WaterDrop";
+      src: url("SSRO_WaterDrop_Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      background: #ffffff;
+      color: #222222;
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    }
+
+
+    /* =========================
+       전체 페이지
+    ========================= */
+
+    .page {
+      width: 92%;
+      max-width: 1100px;
+      min-height: 850px;
+      margin: 60px auto;
+
+      border: 1px solid #222222;
+      background: #ffffff;
+    }
+
+
+    /* =========================
+       로고 영역
+    ========================= */
+
+    .hero {
+      height: 300px;
+      padding: 40px;
+
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+
+    .hero-inner {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+
+    .logo-image {
+      width: 190px;
+      height: auto;
+
+      display: block;
+      object-fit: contain;
+
+      margin-bottom: 18px;
+    }
+
+
+    .tagline {
+      font-size: 12px;
+      color: #888888;
+      letter-spacing: 2px;
+    }
+
+
+    /* =========================
+       D-DAY
+    ========================= */
+
+    .dday {
+      margin-left: 55px;
+      margin-top: 10px;
+
+      font-family: "WaterDrop", sans-serif;
+
+      font-size: 25px;
+      line-height: 1.5;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================
+       메뉴
+    ========================= */
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+
+      border-top: 1px solid #222222;
+      border-bottom: 1px solid #222222;
+    }
+
+
+    .tab {
+      border: none;
+      border-right: 1px solid #222222;
+
+      background: #ffffff;
+      color: #222222;
+
+      padding: 22px 10px;
+
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+
+    .tab:last-child {
+      border-right: none;
+    }
+
+
+    .tab:hover {
+      background: #f5f5f5;
+    }
+
+
+    .tab.active {
+      background: #222222;
+      color: #ffffff;
+    }
+
+
+    .arrow {
+      display: inline-block;
+
+      margin-left: 8px;
+      font-size: 13px;
+
+      transition: transform 0.25s;
+    }
+
+
+    .tab.active .arrow {
+      transform: rotate(180deg);
+    }
+
+
+    /* =========================
+       내용 영역
+    ========================= */
+
+    .content-area {
+      min-height: 500px;
+      padding: 55px;
+    }
+
+
+    /* =========================
+       처음 홈페이지
+    ========================= */
+
+    .intro {
+      display: block;
+      animation: fadeIn 0.35s ease;
+    }
+
+
+    .intro.hidden {
+      display: none;
+    }
+
+
+    .intro h2 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+
+    .intro p {
+      color: #666666;
+      line-height: 1.9;
+      font-size: 15px;
+      max-width: 700px;
+    }
+
+
+    .intro-photo {
+      width: 100%;
+      max-width: 700px;
+
+      height: 380px;
+
+      margin-top: 35px;
+
+      border: 1px solid #dddddd;
+
+      background: #eeeeee;
+
+      overflow: hidden;
+    }
+
+
+    .intro-photo img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+    }
+
+
+    /* =========================
+       각 항목 내용
+    ========================= */
+
+    .content {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+
+    .content.active {
+      display: block;
+    }
+
+
+    .content h2 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+
+    .description {
+      color: #666666;
+
+      line-height: 1.9;
+      font-size: 15px;
+
+      max-width: 700px;
+    }
+
+
+    /* =========================
+       사진 영역
+    ========================= */
+
+    .photo-section {
+      margin-top: 40px;
+    }
+
+
+    .photo-title {
+      font-size: 13px;
+      color: #555555;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 15px;
+    }
+
+
+    .photo-box {
+      width: 100%;
+      max-width: 700px;
+
+      min-height: 380px;
+
+      border: 1px solid #dddddd;
+
+      background: #eeeeee;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+
+    .photo-box img {
+      width: 100%;
+      max-height: 500px;
+
+      display: block;
+
+      object-fit: contain;
+    }
+
+
+    /* =========================
+       애니메이션
+    ========================= */
+
+    @keyframes fadeIn {
+
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    /* =========================
+       모바일
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .page {
+        width: 94%;
+        margin: 25px auto;
+      }
+
+
+      .hero {
+        height: auto;
+        min-height: 230px;
+        padding: 28px 22px;
+      }
+
+
+      .hero-inner {
+        flex-direction: column;
+      }
+
+
+      .logo-image {
+        width: 145px;
+      }
+
+
+      .dday {
+        margin-left: 0;
+        margin-top: 25px;
+
+        font-size: 20px;
+        white-space: normal;
+      }
+
+
+      .tabs {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+
+      .tab {
+        padding: 18px 4px;
+        font-size: 12px;
+      }
+
+
+      .arrow {
+        display: inline-block;
+        margin-left: 3px;
+      }
+
+
+      .content-area {
+        padding: 30px 22px;
+      }
+
+
+      .content h2,
+      .intro h2 {
+        font-size: 26px;
+      }
+
+
+      .description,
+      .intro p {
+        font-size: 14px;
+      }
+
+
+      .photo-box,
+      .intro-photo {
+        min-height: 260px;
+        height: 260px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <main class="page">
+
+
+    <!-- =========================
+         NGB3 로고 + D-DAY
+    ========================= -->
+
+    <header class="hero">
+
+      <div class="hero-inner">
+
+
+        <div class="logo-area">
+
+          <img
+            src="ngb3.png.png"
+            alt="NGB3"
+            class="logo-image"
+          >
+
+          <p class="tagline">
+            OUR SPACE · OUR STORY
+          </p>
+
+        </div>
+
+
+        <!-- D-DAY -->
+        <div class="dday">
+
+          우리가 만난 날 2022.04.14
+          |
+          D+<span id="dday-number"></span>
+
+        </div>
+
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         메뉴
+    ========================= -->
+
+    <nav class="tabs">
+
+      <button
+        class="tab"
+        data-tab="camel"
+        type="button"
+      >
+        낙타
+        <span class="arrow">⌄</span>
+      </button>
+
+
+      <button
+        class="tab"
+        data-tab="rice"
+        type="button"
+      >
+        밥풀
+        <span class="arrow">⌄</span>
+      </button>
+
+
+      <button
+        class="tab"
+        data-tab="shell"
+        type="button"
+      >
+        껍질
+        <span class="arrow">⌄</span>
+      </button>
+
+
+      <button
+        class="tab"
+        data-tab="toilet"
+        type="button"
+      >
+        변기
+        <span class="arrow">⌄</span>
+      </button>
+
+
+      <button
+        class="tab"
+        data-tab="blbe"
+        type="button"
+      >
+        블베
+        <span class="arrow">⌄</span>
+      </button>
+
+    </nav>
+
+
+    <!-- =========================
+         내용
+    ========================= -->
+
+    <section class="content-area">
+
+
+      <!-- =====================
+           처음 홈페이지
+      ====================== -->
+
+      <div
+        class="intro"
+        id="intro"
+      >
+
+        <h2>NGB3이야기</h2>
+
+        <p>
+          NGGB3의 뜻은 낙타의N껍질의G
+          (블베,밥풀,변기)의B 3개를 따서
+          NGB3이 되었다.
+        </p>
+
+        <div class="intro-photo">
+
+          <img
+            src="home.jpg"
+            alt="홈페이지 이미지"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================
+           낙타
+      ====================== -->
+
+      <article
+        class="content"
+        id="camel"
+      >
+
+        <h2>낙타</h2>
+
+        <p class="description">
+          (현)뮤덕(구)오타쿠?였다<br>
+          현재는 뮤지컬을 매우 사랑하지만<br>
+          예전에는 보컬로이드를 좋아하였다<br>
+          예전에 교정기를 착용했을 시절에 하관이 알파카를 닮아<br>
+          알파카 → 라마 → 낙타로 변형되어<br>
+          낙타가 되었다
+        </p>
+
+        <div class="photo-section">
+
+          <div class="photo-title">
+            낙타 PHOTO
+          </div>
+
+          <div class="photo-box">
+
+            <img
+              src="낙타.jpg"
+              alt="낙타 사진"
+            >
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =====================
+           밥풀
+      ====================== -->
+
+      <article
+        class="content"
+        id="rice"
+      >
+
+        <h2>밥풀</h2>
+
+        <p class="description">
+          (구)뮤덕(현)위즈니<br>
+          미래의 플루티스트 유망주이다.<br>
+          밥풀이는 얼굴이 작고 하얗고 밥풀을 닮아<br>
+          밥풀이가 되었다. NGB3의 유일한 예고생이자<br>
+          남녀공학인 고등학교에 다니고 있다.
+        </p>
+
+        <div class="photo-section">
+
+          <div class="photo-title">
+            밥풀 PHOTO
+          </div>
+
+          <div class="photo-box">
+
+            <img
+              src="밥풀.jpg"
+              alt="밥풀 사진"
+            >
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =====================
+           껍질
+      ====================== -->
+
+      <article
+        class="content"
+        id="shell"
+      >
+
+        <h2>껍질</h2>
+
+        <p class="description">
+          (구)오타쿠(현)오타쿠?이다<br>
+          NGB3의 굉장한 그림러이다<br>
+          정말 뛰어난 그림실력을 가지고있다.<br>
+          참고로 일본 애니메이션을 좋아한다.<br>
+          애니메이션에 나오는 일본어를 잘 구사한다.<br><br>
+
+          껍질이가 밥풀이에게
+          난 뭐닮았어?라고 물어봤는데<br>
+          밥풀이가 거북이 등껍질 닮았어라는<br>
+          발언을 하여 껍질이가 되었다
+        </p>
+
+        <div class="photo-section">
+
+          <div class="photo-title">
+            껍질 PHOTO
+          </div>
+
+          <div class="photo-box">
+
+            <img
+              src="껍질.jpg"
+              alt="껍질 사진"
+            >
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =====================
+           변기
+      ====================== -->
+
+      <article
+        class="content"
+        id="toilet"
+      >
+
+        <h2>변기</h2>
+
+        <p class="description">
+          (구)운동광(현)공부광)<br>
+          중학교 3학년때까지만 하여도 운동광이었다<br>
+          하지만 고등학교에 진학하며 갑자기 공부광이 되었다.<br>
+          참고로 갑자기 혼자 자사고에 진학하게 된다<br>
+          초등학교때 피구를 하다 인간병기라고 불렸는데<br>
+          인간병기 → 병기 → 변기가 되었다<br>
+          단지 발음이 비슷해서
+        </p>
+
+        <div class="photo-section">
+
+          <div class="photo-title">
+            변기 PHOTO
+          </div>
+
+          <div class="photo-box">
+
+            <img
+              src="변기.jpg"
+              alt="변기 사진"
+            >
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =====================
+           블베
+      ====================== -->
+
+      <article
+        class="content"
+        id="blbe"
+      >
+
+        <h2>블베</h2>
+
+        <p class="description">
+          모두 같은 동네에 살다 혼자 대치동으로 이사를 가버렸다<br>
+          (구)오타쿠(현)오타쿠.<br>
+          블베는 원신도 좋아했었고<br>
+          좀비고도 좋아했었고<br>
+          괴담출근이라는 소설?도 좋아한다<br>
+          블베는 사실 5명중에 피부가 제일 하얗지만<br>
+          사계절내내 검은옷에 검은마스크와 모자를 쓰고 다녀<br>
+          검은곰같아 붙여진 이름이다. 블랙베어의 줄임말이다.
+        </p>
+
+        <div class="photo-section">
+
+          <div class="photo-title">
+            블베 PHOTO
+          </div>
+
+          <div class="photo-box">
+
+            <img
+              src="블베.jpg"
+              alt="블베 사진"
+            >
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       JavaScript
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       D-DAY 자동 계산
+       
+       2022년 4월 14일을 D+1로 계산
+    ========================= */
+
+    const startDate = new Date(2022, 3, 14);
+    const today = new Date();
+
+    startDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    const days = Math.floor(
+      (today - startDate) / (1000 * 60 * 60 * 24)
+    ) + 1;
+
+    document.getElementById("dday-number").textContent = days;
+
+
+    /* =========================
+       메뉴 작동
+    ========================= */
+
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".content");
+    const intro = document.getElementById("intro");
+
+
+    tabs.forEach(function(tab) {
+
+      tab.addEventListener("click", function() {
+
+        const targetId = tab.getAttribute("data-tab");
+        const target = document.getElementById(targetId);
+
+
+        if (!target) {
+          return;
+        }
+
+
+        /* 다른 메뉴 닫기 */
+
+        tabs.forEach(function(item) {
+          item.classList.remove("active");
+        });
+
+
+        contents.forEach(function(content) {
+          content.classList.remove("active");
+        });
+
+
+        /* 처음 화면 숨기기 */
+
+        if (intro) {
+          intro.classList.add("hidden");
+        }
+
+
+        /* 클릭한 메뉴 열기 */
+
+        tab.classList.add("active");
+        target.classList.add("active");
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
